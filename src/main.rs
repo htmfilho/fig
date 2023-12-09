@@ -1,5 +1,6 @@
 use serde::Serialize;
 use serde::Deserialize;
+use std::fs::read_to_string;
 use std::path::Path;
 use serde_json;
 use std::fs::File;
@@ -20,6 +21,35 @@ struct Mapping {
     target: String,
     description: String,
     profiles: Vec<Profile>,
+}
+
+impl Mapping {
+    fn process(&self) {
+        let source_lines = read_lines(&self.source);
+        
+        for line in source_lines {
+            println!("{}", line);
+        }
+        
+        for profile in &self.profiles {
+            println!("Profile: {}", profile.name);
+            println!("Description: {}", profile.description);
+            for (key, value) in &self.profiles[0].entries {
+                println!("{}: {}", key, value);
+            }
+        }
+    }
+}
+
+fn read_lines(filename: &str) -> Vec<String> {
+    let lines = match read_to_string(filename) {
+        Ok(content) => content.lines().map(String::from).collect(),
+        Err(e) => {
+            println!("Error reading file {}: {}", filename, e);
+            Vec::new()
+        },
+    };
+    return lines
 }
 
 #[derive(Serialize, Deserialize)]
@@ -62,8 +92,15 @@ fn load_config() -> FigConfig {
     return fig_config;
 }
 
+fn process_mappings(mappings: Vec<Mapping>) {
+    for mapping in mappings {
+        println!("\nCreating {} based on {}\n{}", mapping.target, mapping.source, mapping.description);
+        mapping.process();
+    }
+}
+
 fn main() {
     let config = load_config();
-    println!("Config version {} loaded.", config.version);
-    
+    println!("Considering Fig's config version {}", config.version);
+    process_mappings(config.mappings);
 }

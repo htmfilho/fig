@@ -1,0 +1,32 @@
+{
+  "fig": "0.1.0",
+  "version": "1.0",
+  "mappings": [
+    {
+      "source": "examples/application.properties-template",
+      "target": "examples/application.properties",
+      "description": "The main application file example",
+      "profiles": [
+        {
+          "name": "dev-h2",
+          "description": "",
+          "entries": {
+            "spring.datasource.driver-class-name": "org.h2.driver",
+            "spring.datasource.url": "jdbc:h2:file/.data2/h2;MODE=PostgreSQL;AUTO_SERVER=TRUE",
+            "spring.datasource.password": "secret"
+          }
+        },
+        {
+          "name": "dev-postgres",
+          "description": "",
+          "entries": {
+            "spring.datasource.driver-class-name": "org.postgresql.Driver",
+            "spring.datasource.url": "jdbc:postgresql://localhost:5432/postgres",
+            "spring.datasource.username": "postgres",
+            "spring.datasource.password": "secret"
+          }
+        }
+      ]
+    }
+  ]
+}

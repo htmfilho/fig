@@ -1,0 +1,17 @@
+spring.application.name=Digger
+spring.liquibase.enabled=true
+spring.datasource.driver-class-name=org.h2.driver
+spring.datasource.url=
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto: none
+spring.jpa.show-sql=false
+spring.thymeleaf.cache=false
+
+logging.level.root=INFO
+logging.level.liquibase=INFO
+
+user.guide.url=https://www.hildeberto.com/digger
+
+server.port=8080
+server.session.timeout=180
