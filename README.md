@@ -54,8 +54,4 @@ Run **Fig** for the first time to create the `fig.json` file:
 
 Run **Fig** again to take into account your changes in the `fig.json` file. You can also consider one of the profiles:
 
-<<<<<<< HEAD
     $ fig --profile dev
-=======
-    $ fig --profile dev
->>>>>>> af00e7b (Fixed conflict in the README.md file)
