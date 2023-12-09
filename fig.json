@@ -5,7 +5,7 @@
     {
       "source": "examples/application.properties-template",
       "target": "examples/application.properties",
-      "description": "The main application file example",
+      "description": "The main application configuration",
       "profiles": [
         {
           "name": "dev-h2",
@@ -27,6 +27,11 @@
           }
         }
       ]
+    },
+    {
+      "source": "examples/logging.properties-template",
+      "target": "examples/logging.properties",
+      "description": "Logging configuration of the application"
     }
   ]
 }
