@@ -11,10 +11,11 @@ use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-struct Profile {
-    name: String,
-    description: String,
-    entries: HashMap<String, String>,
+struct FigConfig {
+    fig: String,
+    version: String,
+    gitignore: Option<String>,
+    mappings: Vec<Mapping>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -56,12 +57,12 @@ fn read_lines(filename: &str) -> Vec<String> {
     return lines
 }
 
-#[derive(Serialize, Deserialize, Default)]
+#[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-struct FigConfig {
-    fig: String,
-    version: String,
-    mappings: Vec<Mapping>,
+struct Profile {
+    name: String,
+    description: String,
+    entries: HashMap<String, String>,
 }
 
 /// Loads the `fig.json` file in the current directory. If it doesn't exist, 
@@ -74,6 +75,7 @@ fn load_config() -> FigConfig {
             let config = FigConfig {
                 fig: "0.1.0".to_string(),
                 version: "1.0".to_string(),
+                gitignore: None,
                 mappings: vec!(Mapping {
                     source: "".to_string(),
                     target: "".to_string(),
